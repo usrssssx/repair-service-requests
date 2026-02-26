@@ -4,7 +4,6 @@ services:
     env: docker
     plan: free
     autoDeploy: false
-    healthCheckPath: /up
     dockerContext: .
     dockerfilePath: ./Dockerfile
     envVars:
@@ -16,7 +15,3 @@ services:
         value: sqlite
       - key: DB_DATABASE
         value: /var/www/database/database.sqlite
-    disk:
-      name: sqlite-data
-      mountPath: /var/www/database
-      sizeGB: 1
