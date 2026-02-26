@@ -4,7 +4,11 @@ set -e
 cd /var/www
 
 if [ ! -f .env ]; then
-  cp .env.example .env
+  if [ -f .env.example ]; then
+    cp .env.example .env
+  else
+    touch .env
+  fi
 fi
 
 # Ensure dependencies are installed before running artisan
@@ -30,4 +34,4 @@ if [ "$USER_COUNT" -eq 0 ]; then
   php artisan db:seed --force
 fi
 
-php artisan serve --host=0.0.0.0 --port=8000
+php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
