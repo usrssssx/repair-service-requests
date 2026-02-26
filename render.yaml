@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: repair-service
+    env: docker
+    plan: free
+    autoDeploy: false
+    healthCheckPath: /up
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: /var/www/database/database.sqlite
+    disk:
+      name: sqlite-data
+      mountPath: /var/www/database
+      sizeGB: 1
