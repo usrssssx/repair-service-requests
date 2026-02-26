@@ -11,6 +11,10 @@ if [ ! -f .env ]; then
   fi
 fi
 
+# Ensure Laravel storage/cache paths exist
+mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
+chmod -R 775 storage bootstrap/cache
+
 # Ensure dependencies are installed before running artisan
 composer install --no-interaction
 
